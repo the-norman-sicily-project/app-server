@@ -1,0 +1,22 @@
+{
+  "name": "nsp-server",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Node js app server for the Norman Sicily Project",
+  "private": true,
+  "homepage": "https://www.normansicily.org/places/map/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/the-norman-sicily-project/nsp-server.git"
+  },
+  "author": "Joseph Hayes <joephayes@gmail.com> (https://github.com/joephayes)",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "fastify": "^3.12.0",
+    "fastify-plugin": "^3.0.0",
+    "stardog": "git+https://github.com/stardog-union/stardog.js.git#v2"
+  }
+}
