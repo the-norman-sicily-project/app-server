@@ -7,6 +7,11 @@ const config = {
     username: process.env.STARDOG_USER || 'admin',
     password: process.env.STARDOG_PASSWORD || 'admin',
   },
+  mapbox: {
+    username: process.env.MAPBOX_USERNAME || 'YOUR MAPBOX USERNAME',
+    styleId: process.env.MAPBOX_STYLE_ID || 'YOUR MAPBOX STYLE ID',
+    apiAccessToken: process.env.MAPBOX_ACCESS_TOKEN || 'YOUR MAPBOX TOKEN',
+  }
 };
 
 module.exports = config;

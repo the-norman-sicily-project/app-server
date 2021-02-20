@@ -12,12 +12,14 @@
   "author": "Joseph Hayes <joephayes@gmail.com> (https://github.com/joephayes)",
   "scripts": {
     "start": "node index.js",
+    "debug": "node --inspect=127.0.0.1:9229 index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "fastify": "^3.12.0",
     "fastify-cors": "^5.2.0",
     "fastify-plugin": "^3.0.0",
+    "node-fetch": "^2.6.1",
     "stardog": "git+https://github.com/stardog-union/stardog.js.git#v2"
   }
 }
