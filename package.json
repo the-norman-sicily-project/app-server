@@ -1,5 +1,5 @@
 {
-  "name": "nsp-server",
+  "name": "app-server",
   "version": "0.1.0",
   "license": "MIT",
   "description": "Node js app server for the Norman Sicily Project",
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "fastify": "^3.12.0",
+    "fastify-cors": "^5.2.0",
     "fastify-plugin": "^3.0.0",
     "stardog": "git+https://github.com/stardog-union/stardog.js.git#v2"
   }

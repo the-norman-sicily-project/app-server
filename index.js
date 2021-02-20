@@ -2,6 +2,8 @@ const config = require('./config');
 const fastify = require('fastify')({ logger: true });
 const { placeQuery, placesQuery } = require('./queries');
 
+fastify.register(require('fastify-cors'), {});
+
 fastify.register(require('./fastify-stardog'), {
   host: config.stardog.host,
   port: config.stardog.port,
@@ -10,14 +12,14 @@ fastify.register(require('./fastify-stardog'), {
   database: config.stardog.database,
 });
 
-fastify.get('/places', async (request, reply) => {
+fastify.get('/places', async () => {
   const { stardog } = fastify;
   const data = await stardog.executeQuery(placesQuery);
   return data;
 });
 
-fastify.get('/place', async (request, reply) => {
-  const { placeId, placeType } = request.query;
+fastify.get('/places/:placeType/:placeId', async (request, reply) => {
+  const { placeId, placeType } = request.params;
   if (placeId && placeType) {
     const { stardog } = fastify;
     const data = await stardog.executeQuery(placeQuery, { placeId, placeType });
@@ -31,7 +33,7 @@ fastify.get('/place', async (request, reply) => {
 
 const start = async () => {
   try {
-    await fastify.listen(3000)
+    await fastify.listen(config.port);
   } catch (err) {
     fastify.log.error(err)
     process.exit(1)
