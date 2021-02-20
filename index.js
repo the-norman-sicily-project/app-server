@@ -2,7 +2,10 @@ const config = require('./config');
 const fastify = require('fastify')({ logger: true });
 const { placeQuery, placesQuery } = require('./queries');
 
-fastify.register(require('fastify-cors'), {});
+fastify.register(require('fastify-cors'), {
+  method: 'GET',
+  origin: ['http://normansicily.local:3000','http://www.normansicily.org'],
+});
 
 fastify.register(require('./fastify-stardog'), {
   host: config.stardog.host,
