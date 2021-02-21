@@ -8,7 +8,7 @@ fastify.register(require('fastify-cors'), {
   origin: ['http://normansicily.local:3000', 'http://www.normansicily.org'],
 });
 
-fastify.register(require('./fastify-stardog'), {
+fastify.register(require('../fastify-stardog'), {
   host: config.stardog.host,
   port: config.stardog.port,
   username: config.stardog.username,

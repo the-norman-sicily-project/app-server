@@ -11,8 +11,8 @@
   },
   "author": "Joseph Hayes <joephayes@gmail.com> (https://github.com/joephayes)",
   "scripts": {
-    "start": "node index.js",
-    "debug": "node --inspect=127.0.0.1:9229 index.js",
+    "start": "node src/index.js",
+    "debug": "node --inspect=127.0.0.1:9229 src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
