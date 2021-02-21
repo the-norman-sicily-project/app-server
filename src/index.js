@@ -48,7 +48,7 @@ fastify.get('/mapproxy/:z/:x/:y', async (request, reply) => {
 
 const start = async () => {
   try {
-    await fastify.listen(config.port);
+    await fastify.listen(config.port, '0.0.0.0');
   } catch (err) {
     fastify.log.error(err)
     process.exit(1)
