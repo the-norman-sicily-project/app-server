@@ -5,7 +5,7 @@ const { placeQuery, placesQuery } = require('./queries');
 
 fastify.register(require('fastify-cors'), {
   method: 'GET',
-  origin: ['http://normansicily.local:3000', 'http://www.normansicily.org'],
+  origin: ['http://normansicily.local:3000', 'http://normansicily.org', 'http://www.normansicily.org'],
 });
 
 fastify.register(require('./fastify-stardog'), {
@@ -46,6 +46,13 @@ fastify.get('/mapproxy/:z/:x/:y', async (request, reply) => {
   return reply.status(response.status).type(response.type).send(buffer);
 });
 
+fastify.get('/export', async (request, reply) => {
+  const { format, graphUri } = request.query;
+  const { stardog } = fastify;
+  const data = await stardog.exportData(format, graphUri);
+  return data;
+})
+
 const start = async () => {
   try {
     await fastify.listen(config.port, '0.0.0.0');
@@ -56,4 +63,3 @@ const start = async () => {
 };
 
 start();
-
