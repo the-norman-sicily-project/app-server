@@ -6,7 +6,10 @@ const { placeQuery, placesQuery } = require('./queries');
 fastify.register(require('fastify-cors'), {
   method: 'GET',
   origin: ['http://normansicily.local:3000', 'http://normansicily.org', 'http://www.normansicily.org'],
+  exposedHeaders: 'Content-Disposition',
 });
+
+fastify.register(require('fastify-compress'), {});
 
 fastify.register(require('./fastify-stardog'), {
   host: config.stardog.host,
@@ -47,11 +50,14 @@ fastify.get('/mapproxy/:z/:x/:y', async (request, reply) => {
 });
 
 fastify.get('/export', async (request, reply) => {
-  const { format, graphUri } = request.query;
+  const { filename, format, graphUri } = request.query;
   const { stardog } = fastify;
-  const data = await stardog.exportData(format, graphUri);
-  return data;
-})
+  const response = await stardog.exportData(format, graphUri);
+
+  reply.header('Content-Disposition', `attachment; filename=${filename}`);
+  reply.type(response.headers.get('Content-Type'));
+  reply.send(response.body);
+});
 
 const start = async () => {
   try {
