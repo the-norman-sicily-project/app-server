@@ -4,10 +4,9 @@
   "license": "MIT",
   "description": "Node js app server for the Norman Sicily Project",
   "private": true,
-  "homepage": "https://www.normansicily.org/places/map/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/the-norman-sicily-project/nsp-server.git"
+    "url": "https://github.com/the-norman-sicily-project/app-server.git"
   },
   "author": "Joseph Hayes <joephayes@gmail.com> (https://github.com/joephayes)",
   "scripts": {
