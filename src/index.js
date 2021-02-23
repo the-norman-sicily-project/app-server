@@ -5,7 +5,9 @@ const { placeQuery, placesQuery } = require('./queries');
 
 fastify.register(require('fastify-cors'), {
   method: 'GET',
-  origin: ['http://normansicily.local:3000', 'http://normansicily.org', 'http://www.normansicily.org'],
+  origin: ['http://normansicily.local:3000',
+    'http://normansicily.org', 'https://normansicily.org',
+    'https://www.normansicily.org', ' http://www.normansicily.org'],
   exposedHeaders: 'Content-Disposition',
 });
 
