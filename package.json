@@ -20,6 +20,6 @@
     "fastify-cors": "^5.2.0",
     "fastify-plugin": "^3.0.0",
     "node-fetch": "^2.6.1",
-    "stardog": "git+https://github.com/stardog-union/stardog.js.git#v2"
+    "stardog": "^3.0.0"
   }
 }
