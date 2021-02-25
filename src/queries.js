@@ -164,5 +164,18 @@ query getPlace($placeId: String!, $placeType: String!) {
 }
 `;
 
-module.exports.placesQuery = placesQuery;
-module.exports.placeQuery = placeQuery;
+const searchPlaceNamesQuery = `
+    query searchPlaceGraph($textToFind: String!) @config(graph: ["http://www.normansicily.org/nsp/places", "http://www.normansicily.org/nsp/locations"]) {
+        nsp_Place @type {
+            rdfs_label @filter(if: "contains(lcase($rdfs_label), lcase($textToFind))")
+            nsp_hasLocation @hide {
+                nsp_Location @type {
+                    wgs_lat 
+                    wgs_long
+                }
+            }
+        }
+    }
+`;
+
+module.exports = { placesQuery, placeQuery, searchPlaceNamesQuery };

@@ -1,7 +1,7 @@
 const fastify = require('fastify')({ logger: true });
 const fetch = require("node-fetch");
 const config = require('./config');
-const { placeQuery, placesQuery } = require('./queries');
+const { placeQuery, placesQuery, searchPlaceNamesQuery } = require('./queries');
 
 fastify.register(require('fastify-cors'), {
   method: 'GET',
@@ -23,9 +23,19 @@ fastify.register(require('./fastify-stardog'), {
 
 fastify.get('/places', async () => {
   const { stardog } = fastify;
-  const data = await stardog.executeQuery(placesQuery);
-  return data;
+  return await stardog.executeQuery(placesQuery);
 });
+
+fastify.get('/names', async (request) => {
+  const { stardog } = fastify;
+  const { q } = request.query;
+  if (q && q.trim().length > 0) {
+    const data = await stardog.executeQuery(searchPlaceNamesQuery, { textToFind: q });
+    return data;
+  }
+  return [];
+});
+
 
 fastify.get('/places/:placeType/:placeId', async (request, reply) => {
   const { placeId, placeType } = request.params;
