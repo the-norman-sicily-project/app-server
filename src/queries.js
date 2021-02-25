@@ -1,5 +1,5 @@
 const placesQuery = `
-{
+query getPlaces @config(graph: ["http://www.normansicily.org/nsp/ontology", "http://www.normansicily.org/nsp/places", "http://www.normansicily.org/nsp/locations"]) {
     nsp_Place @type {
       nsp_id
       iri
@@ -35,7 +35,18 @@ fragment ReferenceFragment on nsp_Reference {
     nsp_notes
 }
 
-query getPlace($placeId: String!, $placeType: String!) {
+query getPlace($placeId: String!, $placeType: String!)
+    @config(graph: 
+            [
+                "http://www.normansicily.org/nsp/cssi-assessments",
+                "http://www.normansicily.org/nsp/places",
+                "http://www.normansicily.org/nsp/locations",
+                "http://www.normansicily.org/nsp/links",
+                "http://www.normansicily.org/nsp/ontology",
+                "http://www.normansicily.org/nsp/people",
+                "http://www.normansicily.org/nsp/places",
+                "http://www.normansicily.org/nsp/references"
+            ]) {
     nsp_Place(nsp_id: $placeId nsp_placeType: $placeType)  @type {
         iri
         nsp_id
@@ -165,7 +176,7 @@ query getPlace($placeId: String!, $placeType: String!) {
 `;
 
 const searchPlaceNamesQuery = `
-    query searchPlaceGraph($textToFind: String!) @config(graph: ["http://www.normansicily.org/nsp/places", "http://www.normansicily.org/nsp/locations"]) {
+    query searchPlaceGraph($textToFind: String!) @config(graph: [ "http://www.normansicily.org/nsp/ontology", "http://www.normansicily.org/nsp/places", "http://www.normansicily.org/nsp/locations"]) {
         nsp_Place @type {
             rdfs_label @filter(if: "contains(lcase($rdfs_label), lcase($textToFind))")
             nsp_hasLocation @hide {
