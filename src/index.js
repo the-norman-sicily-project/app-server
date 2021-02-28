@@ -1,5 +1,5 @@
 const fastify = require('fastify')({ logger: true });
-const fetch = require("node-fetch");
+const fetch = require('node-fetch');
 const config = require('./config');
 const { placeQuery, placesQuery, searchPlaceNamesQuery } = require('./queries');
 
@@ -30,7 +30,9 @@ fastify.get('/names', async (request) => {
   const { stardog } = fastify;
   const { q } = request.query;
   if (q && q.trim().length > 0) {
-    const data = await stardog.executeQuery(searchPlaceNamesQuery, { textToFind: q });
+    const data = await stardog.executeGetQuery(searchPlaceNamesQuery, {
+      textToFind: q
+    });
     return data;
   }
   return [];

@@ -29,7 +29,7 @@ query getPlaces
 }`;
 
 const placeQuery = `
-query getPlace($placeId: String!, $placeType: String!)
+query getPlace($placeIri: IRI!)
   @config(
     graph: [
       "http://www.normansicily.org/nsp/cssi-assessments"
@@ -42,7 +42,7 @@ query getPlace($placeId: String!, $placeType: String!)
       "http://www.normansicily.org/nsp/references"
     ]
   ) {
-  nsp_Place(nsp_id: $placeId, nsp_placeType: $placeType) @type {
+  nsp_Place(iri: $placeIri) @type {
     iri
     nsp_id
     rdfs_label @hide
@@ -185,18 +185,6 @@ query getPlace($placeId: String!, $placeType: String!)
   }
 }`;
 
-const searchPlaceNamesQuery = `
-    query searchPlaceGraph($textToFind: String!) @config(graph: [ "http://www.normansicily.org/nsp/ontology", "http://www.normansicily.org/nsp/places", "http://www.normansicily.org/nsp/locations"]) {
-        nsp_Place @type {
-            rdfs_label @filter(if: "contains(lcase($rdfs_label), lcase($textToFind))")
-            nsp_hasLocation @hide {
-                nsp_Location @type {
-                    wgs_lat 
-                    wgs_long
-                }
-            }
-        }
-    }
-`;
+const searchPlaceNamesQuery = `query searchPlaceGraph($textToFind:String!)@config(graph:["http://www.normansicily.org/nsp/ontology" "http://www.normansicily.org/nsp/places" "http://www.normansicily.org/nsp/locations"]){nsp_Place @type{rdfs_label @filter(if:"contains(lcase($rdfs_label), lcase($textToFind))")nsp_hasLocation @hide{nsp_Location @type{wgs_lat wgs_long}}}}`;
 
 module.exports = { placesQuery, placeQuery, searchPlaceNamesQuery };
