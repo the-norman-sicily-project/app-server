@@ -29,7 +29,7 @@ query getPlaces
 }`;
 
 const placeQuery = `
-query getPlace($placeIri: IRI!)
+query getPlace($placeId: String!, $placeType: String!)
   @config(
     graph: [
       "http://www.normansicily.org/nsp/cssi-assessments"
@@ -42,7 +42,7 @@ query getPlace($placeIri: IRI!)
       "http://www.normansicily.org/nsp/references"
     ]
   ) {
-  nsp_Place(iri: $placeIri) @type {
+  nsp_Place(nsp_id: $placeId, nsp_placeType: $placeType) @type {
     iri
     nsp_id
     rdfs_label @hide
