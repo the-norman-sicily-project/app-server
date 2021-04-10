@@ -49,7 +49,6 @@ query getPlace($placeId: String!, $placeType: String!)
     labels @bind(to: "concat(lang($rdfs_label), ',', $rdfs_label)")
     nsp_placeType
     skos_prefLabel
-    nsp_historicalProvince
     nsp_hasLocation {
       nsp_Location @type {
         rdfs_seeAlso
@@ -61,6 +60,8 @@ query getPlace($placeId: String!, $placeType: String!)
         }
         nsp_modernComune
         nsp_modernProvince
+        nsp_historicalProvince
+        nsp_locationHighLoc @optional
         wgs_alt @optional
         nsp_seismicCode @optional
         skos_altLabel @optional
