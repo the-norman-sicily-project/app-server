@@ -13,8 +13,6 @@ fastify.register(require('fastify-cors'), {
 
 fastify.register(require('fastify-compress'), {});
 
-fastify.register(require('fastify-healthcheck'), {exposeUptime: true});
-
 fastify.register(require('./fastify-stardog'), {
   host: config.stardog.host,
   port: config.stardog.port,
@@ -74,6 +72,8 @@ fastify.get('/export', async (request, reply) => {
   reply.type(response.headers.get('Content-Type'));
   reply.send(response.body);
 });
+
+fastify.get('/health', async(request, reply) => reply.send({"status": "OK"}))
 
 const start = async () => {
   try {
