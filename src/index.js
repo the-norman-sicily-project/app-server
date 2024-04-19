@@ -13,6 +13,8 @@ fastify.register(require('fastify-cors'), {
 
 fastify.register(require('fastify-compress'), {});
 
+fastify.register(require('fastify-healthcheck'), {exposeUptime: true});
+
 fastify.register(require('./fastify-stardog'), {
   host: config.stardog.host,
   port: config.stardog.port,
